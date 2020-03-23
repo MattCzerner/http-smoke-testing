@@ -26,6 +26,14 @@ interface RequestDataSetConfig
     public function setExpectedStatusCode($code);
 
     /**
+     * Sets HTTP method for this request data set.
+     *
+     * @param string $method
+     * @return $this
+     */
+    public function setHttpMethod(string $method);
+
+    /**
      * Sets a value of a specified route parameter for this request data set.
      *
      * @param string $name

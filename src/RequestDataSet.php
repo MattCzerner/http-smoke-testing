@@ -46,6 +46,11 @@ class RequestDataSet implements RequestDataSetConfig
     private $callsDuringTestExecution;
 
     /**
+     * @var string
+     */
+    private $httpMethod;
+
+    /**
      * @param string $routeName
      */
     public function __construct($routeName)
@@ -55,6 +60,7 @@ class RequestDataSet implements RequestDataSetConfig
         $this->parameters = [];
         $this->debugNotes = [];
         $this->callsDuringTestExecution = [];
+        $this->httpMethod = 'GET';
     }
 
     /**
@@ -95,6 +101,23 @@ class RequestDataSet implements RequestDataSetConfig
         }
 
         return $this->expectedStatusCode;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setHttpMethod(string $method)
+    {
+        if (in_array($method, ['POST', 'GET', 'DELETE', 'PUT']) === false) {
+            throw new \Exception('Unexpected http method');
+        }
+
+        $this->httpMethod = $method;
+    }
+
+    public function getHttpMethod(): string
+    {
+        return $this->httpMethod;
     }
 
     /**

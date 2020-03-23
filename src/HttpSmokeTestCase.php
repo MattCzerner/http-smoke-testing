@@ -114,7 +114,7 @@ abstract class HttpSmokeTestCase extends KernelTestCase
     {
         $uri = $this->getRouterAdapter()->generateUri($requestDataSet);
 
-        $request = Request::create($uri);
+        $request = Request::create($uri, $requestDataSet->getHttpMethod());
 
         $requestDataSet->getAuth()
             ->authenticateRequest($request);
